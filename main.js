@@ -1,27 +1,28 @@
 // Section 2: Timing Our Code
 
-// const addUpTo = (n) => {
-//     let total = 0;
-//     for (let i = 1; i <= n; i++) {
-//         total += i;
-//     }
-//     return total;
-// }
+const addUpToFirst = (n) => {
+    let total = 0;
+    for (let i = 1; i <= n; i++) {
+        total += i;
+    }
+    return total;
+}
 
-// const t1 = performance.now();
-// console.log(addUpTo(100000000));
-// const t2 = performance.now();
+const ta = performance.now();
+console.log('Add up to first:', addUpToFirst(200));
+const tb = performance.now();
 
 
-const addUpTo = (n) => {
+const addUpToSecond = (n) => {
     return n * (n + 1) / 2;
 }
 
-const t1 = performance.now();
-console.log(addUpTo(200));
-const t2 = performance.now();
+const tc = performance.now();
+console.log('Add up to second:', addUpToSecond(200));
+const td = performance.now();
 
-console.log(`Time elapsed: ${(t2 - t1) / 1000} seconds`);
+console.log(`addUpToFirst time elapsed: ${(tb - ta) / 1000} seconds`);
+console.log(`addUpToSecond time elapsed: ${(td - tc) / 1000} seconds`);
 
 const logAtLeast5 = (n) => {
   for (let i = 1; i <= Math.max(5, n); i++) {
