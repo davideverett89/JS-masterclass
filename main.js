@@ -38,3 +38,43 @@ const logAtMost5 = (n) => {
 
 logAtLeast5(10);
 logAtMost5(10);
+
+// Understand The Problem:
+
+// 1. Can I restate the problem in my own words?
+// 2. What are the inputs that go into the problem?
+// 3. What are the outputs that should come from the solution to the problem?
+// 4. Can the outputs be determinded from the inputs?  Do I have enough information to solve the problem?
+// 5. How should I label the important pieces of data that are part of the problem?
+
+// Explore examples:
+
+// 1. Start with simple examples.
+// 2. Progress to more complex examples.
+// 3. Explore examples with empty inputs.
+// 4. Explore examples with invalid inputs.
+
+// Write a function that takes in a string and returns counts of each character in the string
+
+console.clear();
+
+const charCounter = (string) => {
+  const chars = string.toLowerCase().split('');
+  console.log(chars);
+  const charCount = chars.reduce((x, y) => {
+      if (x !== undefined) {
+        if (y in x) {
+            x[y]++;
+        } else {
+            x[y] = 1;
+        }
+        return x;
+      }
+  }, {});
+  console.log(charCount);
+};
+
+charCounter('Hello world');
+
+// Break it down:
+// Explicitly write out the steps you need to take.
