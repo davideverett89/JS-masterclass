@@ -162,3 +162,37 @@ function validAnagram(str1, str2) {
 }
 
 console.log(validAnagram('rat', 'car'));
+
+console.clear();
+
+// function sumZero(arr) {
+//     let val1; let val2;
+//     for (let i = 0; i < arr.length; i++) {
+//         val1 = arr[i];
+//     }
+//     for (let j = arr.length; j >= 0; j--) {
+//         val2 = arr[j];
+//     }
+//     if (val1 + val2 === 0) {
+//         return [val1, val2];
+//     } else {
+//         return undefined;
+//     }
+// };
+
+function sumZero(arr) {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left < right) {
+        const sum = arr[left] + arr[right];
+        if (sum === 0) {
+            return [arr[left], arr[right]]
+        } else if (sum > 0) {
+            right--;
+        } else {
+            left++;
+        }
+    }
+};
+
+console.log(sumZero([-3, -2, -1, 0, 1, 2, 3]));
