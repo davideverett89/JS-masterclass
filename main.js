@@ -90,3 +90,148 @@ const isAlphaNumeric = (char) => {
 };
 
 charCounter('Hello world!#$@#!@@@');
+
+// Problem Solving Patterns:
+
+// 1. Frequency Counter:
+
+// Use objects and avoid nested loops.
+
+// const same = (arr1, arr2) => {
+//     if (arr1.length !== arr2.length) {
+//         return false;
+//     }
+//     return arr1.every((x, i)=> {
+//         const square = Math.pow(x, 2);
+//         if (arr2.includes(square)) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     });
+// };
+
+console.clear();
+
+// function same(arr1, arr2) {
+//     if (arr1.length !== arr2.length) return false;
+//     for (let i = 0; i < arr1.length; i++) {
+//         const correctIndex = arr2.indexOf(Math.pow(arr1[i], 2));
+//         if (correctIndex === -1) return false;
+//         arr2.splice(correctIndex, 1);
+//     }
+//     return true;
+// };
+
+function same(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    let frequencyCounter1 = {};
+    let frequencyCounter2 = {};
+    for (let val of arr1) {
+        frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1;
+    }
+    for (let val of arr2) {
+        frequencyCounter2[val] = (frequencyCounter2[val] || 0) + 1;
+    }
+    for (let key in frequencyCounter1) {
+        if (!(Math.pow(key, 2) in frequencyCounter2)) return false;
+        if (frequencyCounter2[Math.pow(key, 2)] !== frequencyCounter1[key]) return false;
+    }
+    return true;
+};
+
+
+console.log(same([2, 2, 4], [4, 16]));
+
+console.clear();
+
+function validAnagram(str1, str2) {
+    const data1 = {};
+    const data2 = {};
+    if (str1.length !== str2.length) return false;
+    for (let char of str1) {
+        data1[char] = (data1[char] || 0) + 1;
+    }
+    for (let char of str2) {
+        data2[char] = (data2[char] || 0) + 1;
+    }
+    for (let key in data1) {
+        if (data2[key] !== data1[key]) return false;
+    }
+    return true;
+}
+
+console.log(validAnagram('rat', 'car'));
+
+console.clear();
+
+// function sumZero(arr) {
+//     let val1; let val2;
+//     for (let i = 0; i < arr.length; i++) {
+//         val1 = arr[i];
+//     }
+//     for (let j = arr.length; j >= 0; j--) {
+//         val2 = arr[j];
+//     }
+//     if (val1 + val2 === 0) {
+//         return [val1, val2];
+//     } else {
+//         return undefined;
+//     }
+// };
+
+function sumZero(arr) {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left < right) {
+        const sum = arr[left] + arr[right];
+        if (sum === 0) {
+            return [arr[left], arr[right]]
+        } else if (sum > 0) {
+            right--;
+        } else {
+            left++;
+        }
+    }
+};
+
+console.log(sumZero([-3, -2, -1, 0, 1, 2, 3]));
+
+console.clear();
+
+// function countUniqueValues(arr) {
+//     const newArr = [...arr];
+//     console.log('Starting array:', newArr);
+//     let left = 0;
+//     let right = left + 1;
+//     while (right <= newArr.length - 1) {
+//         if (left !== right) {
+//             console.log('Starting left/right values:', left, right);
+//             if (newArr[left] === newArr[right]) {
+//                 right++;
+//             } else {
+//                 left++
+//                 const number = newArr[right];
+//                 console.log('Number removed from array:', newArr.splice(left, 1, number));
+//                 console.log('New array:', newArr);
+//             }
+//         } else {
+//             right++;
+//         }
+//     }
+//     return left;
+// };
+
+function countUniqueValues(arr){
+    if(arr.length === 0) return 0;
+    let i = 0;
+    for(let j = 1; j < arr.length; j++){
+        if(arr[i] !== arr[j]){
+            i++;
+            arr[i] = arr[j]
+        }
+    }
+    return i + 1;
+}
+
+console.log(countUniqueValues([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13]));
