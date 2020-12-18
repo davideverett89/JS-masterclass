@@ -196,3 +196,42 @@ function sumZero(arr) {
 };
 
 console.log(sumZero([-3, -2, -1, 0, 1, 2, 3]));
+
+console.clear();
+
+// function countUniqueValues(arr) {
+//     const newArr = [...arr];
+//     console.log('Starting array:', newArr);
+//     let left = 0;
+//     let right = left + 1;
+//     while (right <= newArr.length - 1) {
+//         if (left !== right) {
+//             console.log('Starting left/right values:', left, right);
+//             if (newArr[left] === newArr[right]) {
+//                 right++;
+//             } else {
+//                 left++
+//                 const number = newArr[right];
+//                 console.log('Number removed from array:', newArr.splice(left, 1, number));
+//                 console.log('New array:', newArr);
+//             }
+//         } else {
+//             right++;
+//         }
+//     }
+//     return left;
+// };
+
+function countUniqueValues(arr){
+    if(arr.length === 0) return 0;
+    let i = 0;
+    for(let j = 1; j < arr.length; j++){
+        if(arr[i] !== arr[j]){
+            i++;
+            arr[i] = arr[j]
+        }
+    }
+    return i + 1;
+}
+
+console.log(countUniqueValues([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13]));
