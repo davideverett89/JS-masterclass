@@ -54,6 +54,15 @@ logAtMost5(10);
 // 3. Explore examples with empty inputs.
 // 4. Explore examples with invalid inputs.
 
+// Break it down:
+// Explicitly write out the steps you need to take.
+
+
+// Solve/Simplify
+
+// Look Back and Refactor
+
+
 // Write a function that takes in a string and returns counts of each character in the string
 
 console.clear();
@@ -62,19 +71,22 @@ const charCounter = (string) => {
   const chars = string.toLowerCase().split('');
   console.log(chars);
   const charCount = chars.reduce((x, y) => {
-      if (x !== undefined) {
-        if (y in x) {
-            x[y]++;
-        } else {
-            x[y] = 1;
-        }
-        return x;
-      }
+      if (isAlphaNumeric(y)) {
+        x[y] = ++x[y] || 1;
+    }
+    return x;
   }, {});
   console.log(charCount);
 };
 
-charCounter('Hello world');
+const isAlphaNumeric = (char) => {
+    const code = char.charCodeAt(0);
+    if (!(code > 47 && code < 58) &&
+        !(code > 64 && code < 91) &&
+        !(code > 96 && code < 123)) {
+            return false;
+    }
+    return true;
+};
 
-// Break it down:
-// Explicitly write out the steps you need to take.
+charCounter('Hello world!#$@#!@@@');
