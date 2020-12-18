@@ -142,3 +142,23 @@ function same(arr1, arr2) {
 
 
 console.log(same([2, 2, 4], [4, 16]));
+
+console.clear();
+
+function validAnagram(str1, str2) {
+    const data1 = {};
+    const data2 = {};
+    if (str1.length !== str2.length) return false;
+    for (let char of str1) {
+        data1[char] = (data1[char] || 0) + 1;
+    }
+    for (let char of str2) {
+        data2[char] = (data2[char] || 0) + 1;
+    }
+    for (let key in data1) {
+        if (data2[key] !== data1[key]) return false;
+    }
+    return true;
+}
+
+console.log(validAnagram('rat', 'car'));
