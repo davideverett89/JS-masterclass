@@ -297,4 +297,17 @@ function areThereDuplicates(...args) {
     return false;
 }
 
-console.log(areThereDuplicates('a', 'b', 'c', 'a'));
+// console.log(areThereDuplicates('a', 'b', 'c', 'a'));
+
+function averagePair(arr, num) {
+    let left = 0; let right = 1;
+    const avg = (arr[left] + arr[right]) / 2;
+    while (right < arr.length - 1) {
+        if (avg === num) return true;
+        left++
+        right++
+    }
+    return false;
+}
+
+console.log(averagePair([1, 3, 3, 5, 6, 7, 10, 12, 19], 8));
