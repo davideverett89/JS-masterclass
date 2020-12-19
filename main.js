@@ -225,7 +225,7 @@ console.clear();
 function countUniqueValues(arr){
     if(arr.length === 0) return 0;
     let i = 0;
-    for(let j = 1; j < arr.length; j++){
+    for (let j = 1; j < arr.length; j++){
         if(arr[i] !== arr[j]){
             i++;
             arr[i] = arr[j]
@@ -235,3 +235,59 @@ function countUniqueValues(arr){
 }
 
 console.log(countUniqueValues([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13]));
+
+// function maxSubarraySum(arr, range) {
+//     if (range > arr.length) return null;
+//     const sums = [];
+//     let right = range;
+//     console.log('Starting array:', arr);
+//     for (let i = 0; i < arr.length - range + 1; i++) {
+//         const sum = arr.slice(i, right).reduce((acc, curr) => acc + curr);
+//         console.log(sum);
+//         sums.push(sum);
+//         right++;
+//     }
+//     return Math.max(...sums);
+// };
+
+function maxSubarraySum(arr, num) {
+    let maxSum = 0;
+    let tempSum = 0;
+    if (arr.length < num) return null;
+    for (let i = 0; i < num; i++) {
+        maxSum += arr[i];
+    }
+    tempSum = maxSum;
+    for (let i = num; i < arr.length; i++) {
+        tempSum = tempSum - arr[i - num] + arr[i];
+        maxSum = Math.max(maxSum, tempSum);
+    }
+    return maxSum;
+};
+
+console.clear();
+
+// function sameFrequency(num1, num2) {
+//     if (num1.toString().length !== num2.toString().length) return false;
+//     let data1 = {}; let data2 = {};
+//     for (let i of num1.toString()) {
+//         data1[i] = ++data1[i] || 1;
+//     }
+//     for (let j of num2.toString()) {
+//         data2[j] = ++data2[j] || 1;
+//     }
+//     for (let key in data1) {
+//         if (data2[key] !== data1[key]) return false;
+//     }
+//     return true;
+// }
+
+// sameFrequency(182, 281);
+
+function areThereDuplicates(...args) {
+    console.log('Args:', args);
+    let left = 0; let right = 1;
+    
+}
+
+console.log(areThereDuplicates('a', 'b', 'c', 'a'));
