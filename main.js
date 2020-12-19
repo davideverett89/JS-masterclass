@@ -285,9 +285,16 @@ console.clear();
 // sameFrequency(182, 281);
 
 function areThereDuplicates(...args) {
-    console.log('Args:', args);
-    let left = 0; let right = 1;
-    
+    const data = {};
+    for (let i of args) {
+        data[i] = (data[i] || 0) + 1;
+    }
+    for (let key in data) {
+        if (data[key] === 2) {
+            return true;
+        }
+    }
+    return false;
 }
 
 console.log(areThereDuplicates('a', 'b', 'c', 'a'));
