@@ -336,17 +336,43 @@ function isSubsequence(str1, str2) {
 console.clear();
 
 function minSubArrayLen(arr, num) {
-    let minLength = 0; let tempLength = 0;
-    let sum = 0; let i = 0;
-    while (sum <= num) {
-        sum += arr[i];
-        console.log('Sum:', sum);
-        console.log('I', i);
-        i++;
+    let sum = 0;
+    let start = 0;
+    let end = 0;
+    let minLength = Infinity;
+    while (start < arr.length) {
+        if (sum < num && end < arr.length) {
+            sum += arr[end];
+            end++
+        } else if (sum >= num) {
+            minLength = Math.min(minLength, end - start)
+            sum -= arr[start];
+            start++;
+        } else {
+            break;
+        }
     }
-    minLength = i;
-    tempLength = minLength;
-    for (let j = 0; j < )
+    return minLength === Infinity ? 0 : minLength;
 }
 
-minSubArrayLen([2, 3, 1, 2, 4, 3], 7);
+console.log(minSubArrayLen([2, 3, 1, 2, 4, 3], 7));
+
+console.clear();
+
+function findLongestSubstring(str) {
+    let longest = 0;
+    let seen = {};
+    let start = 0;
+   
+    for (let i = 0; i < str.length; i++) {
+      let char = str[i];
+      if (seen[char]) {
+        start = Math.max(start, seen[char]);
+      }
+      longest = Math.max(longest, i - start + 1);
+      seen[char] = i + 1;
+    }
+    return longest;
+  }
+
+console.log(findLongestSubstring('rithmschool'));
