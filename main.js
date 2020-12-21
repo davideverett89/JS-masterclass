@@ -225,7 +225,7 @@ console.clear();
 function countUniqueValues(arr){
     if(arr.length === 0) return 0;
     let i = 0;
-    for(let j = 1; j < arr.length; j++){
+    for (let j = 1; j < arr.length; j++){
         if(arr[i] !== arr[j]){
             i++;
             arr[i] = arr[j]
@@ -235,3 +235,144 @@ function countUniqueValues(arr){
 }
 
 console.log(countUniqueValues([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13]));
+
+// function maxSubarraySum(arr, range) {
+//     if (range > arr.length) return null;
+//     const sums = [];
+//     let right = range;
+//     console.log('Starting array:', arr);
+//     for (let i = 0; i < arr.length - range + 1; i++) {
+//         const sum = arr.slice(i, right).reduce((acc, curr) => acc + curr);
+//         console.log(sum);
+//         sums.push(sum);
+//         right++;
+//     }
+//     return Math.max(...sums);
+// };
+
+function maxSubarraySum(arr, num) {
+    let maxSum = 0;
+    let tempSum = 0;
+    if (arr.length < num) return null;
+    for (let i = 0; i < num; i++) {
+        maxSum += arr[i];
+    }
+    tempSum = maxSum;
+    for (let i = num; i < arr.length; i++) {
+        tempSum = tempSum - arr[i - num] + arr[i];
+        maxSum = Math.max(maxSum, tempSum);
+    }
+    return maxSum;
+};
+
+console.clear();
+
+// function sameFrequency(num1, num2) {
+//     if (num1.toString().length !== num2.toString().length) return false;
+//     let data1 = {}; let data2 = {};
+//     for (let i of num1.toString()) {
+//         data1[i] = ++data1[i] || 1;
+//     }
+//     for (let j of num2.toString()) {
+//         data2[j] = ++data2[j] || 1;
+//     }
+//     for (let key in data1) {
+//         if (data2[key] !== data1[key]) return false;
+//     }
+//     return true;
+// }
+
+// sameFrequency(182, 281);
+
+function areThereDuplicates(...args) {
+    const data = {};
+    for (let i of args) {
+        data[i] = (data[i] || 0) + 1;
+    }
+    for (let key in data) {
+        if (data[key] === 2) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// console.log(areThereDuplicates('a', 'b', 'c', 'a'));
+
+function averagePair(arr, num) {
+    let left = 0; let right = 1;
+    while (left < arr.length - 1) {
+        const leftNum = arr[left];  const rightNum = arr[right];
+        const avg = (leftNum + rightNum) / 2;
+        if (avg === num) return true;
+        if (right === arr.length - 1) {
+            left++;
+            right = left + 1;
+        } else {
+            right++;
+        }
+    }
+    return false;
+}
+
+console.log(averagePair([1, 3, 3, 5, 6, 7, 10, 12, 19], 8));
+
+console.clear();
+
+function isSubsequence(str1, str2) {
+    let left = 0;
+    const arr1 = str1.split(''); const arr2 = str2.split('');
+    for (let i = 0; i < arr2.length; i++) {
+        if (arr1[left] === arr2[i]) {
+            left++;
+        }
+    }
+    if (left === arr1.length) return true;
+    return false;
+}
+
+// console.log(isSubsequence('hello', 'hello world'));
+
+console.clear();
+
+function minSubArrayLen(arr, num) {
+    let sum = 0;
+    let start = 0;
+    let end = 0;
+    let minLength = Infinity;
+    while (start < arr.length) {
+        if (sum < num && end < arr.length) {
+            sum += arr[end];
+            end++
+        } else if (sum >= num) {
+            minLength = Math.min(minLength, end - start)
+            sum -= arr[start];
+            start++;
+        } else {
+            break;
+        }
+    }
+    return minLength === Infinity ? 0 : minLength;
+}
+
+console.log(minSubArrayLen([2, 3, 1, 2, 4, 3], 7));
+
+console.clear();
+
+function findLongestSubstring(str) {
+    let longest = 0;
+    let seen = {};
+    let start = 0;
+   
+    for (let i = 0; i < str.length; i++) {
+      let char = str[i];
+      if (seen[char]) {
+        start = Math.max(start, seen[char]);
+      }
+      longest = Math.max(longest, i - start + 1);
+      seen[char] = i + 1;
+    }
+    return longest;
+  }
+
+console.log(findLongestSubstring('rithmschool'));
