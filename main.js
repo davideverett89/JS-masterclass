@@ -301,13 +301,52 @@ function areThereDuplicates(...args) {
 
 function averagePair(arr, num) {
     let left = 0; let right = 1;
-    const avg = (arr[left] + arr[right]) / 2;
-    while (right < arr.length - 1) {
+    while (left < arr.length - 1) {
+        const leftNum = arr[left];  const rightNum = arr[right];
+        const avg = (leftNum + rightNum) / 2;
         if (avg === num) return true;
-        left++
-        right++
+        if (right === arr.length - 1) {
+            left++;
+            right = left + 1;
+        } else {
+            right++;
+        }
     }
     return false;
 }
 
 console.log(averagePair([1, 3, 3, 5, 6, 7, 10, 12, 19], 8));
+
+console.clear();
+
+function isSubsequence(str1, str2) {
+    let left = 0;
+    const arr1 = str1.split(''); const arr2 = str2.split('');
+    for (let i = 0; i < arr2.length; i++) {
+        if (arr1[left] === arr2[i]) {
+            left++;
+        }
+    }
+    if (left === arr1.length) return true;
+    return false;
+}
+
+// console.log(isSubsequence('hello', 'hello world'));
+
+console.clear();
+
+function minSubArrayLen(arr, num) {
+    let minLength = 0; let tempLength = 0;
+    let sum = 0; let i = 0;
+    while (sum <= num) {
+        sum += arr[i];
+        console.log('Sum:', sum);
+        console.log('I', i);
+        i++;
+    }
+    minLength = i;
+    tempLength = minLength;
+    for (let j = 0; j < )
+}
+
+minSubArrayLen([2, 3, 1, 2, 4, 3], 7);
